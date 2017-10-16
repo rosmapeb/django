@@ -1,19 +1,13 @@
-<html>
-    <head>
-        <title>Django blog</title>
-    </head>
-    <body>
+{% extends 'blog/base.html' %}
 
-        <div>
-            <h1><a href="">Django Blog</a></h1>
-        </div>
-            {%  for po in posts %}
-            <div>
-              <p>published: {{po.published_date}} </p>
-              <h1><a href=""> {{po.title}}</a></h1>
-              <p> {{po.text|linebreaksbr}} </p>
-            </div>
-            {% endfor %}
-
-    </body>
-</html>
+{% block content %}
+  {%  for po in posts %}
+    <div class="post">
+      <div class="date">
+        {{po.published_date}}
+      </div>
+      <h1><a href="{% url 'post_detail' pk=po.pk %}"> {{po.title}}</a></h1>
+      <p> {{po.text|linebreaksbr}} </p>
+    </div>
+  {% endfor %}
+{% endblock %}
